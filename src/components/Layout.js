@@ -2,8 +2,12 @@ import * as React from "react";
 import { Helmet } from "react-helmet";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import "../style/bulma-style.sass";
-import "../style/custom-style.sass";
+import Header from '../components/Header';
+import Main from '../components/Main';
+import ContactInfo from './ContactInfo';
+import "../style/bulma-style.scss";
+import "../style/custom-style.scss";
+import '../style/main.scss';
 import useSiteMetadata from "./SiteMetadata";
 import { withPrefix } from "gatsby";
 
@@ -50,7 +54,9 @@ const TemplateWrapper = ({ children }) => {
         />
       </Helmet>
       <Navbar />
-      <div>{children}</div>
+      <Header />
+      {children}
+      <ContactInfo />
       <Footer />
     </div>
   );

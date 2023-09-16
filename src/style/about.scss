@@ -1,0 +1,31 @@
+.about-text {
+  width: 250px;
+  padding: 30px;
+  font-size: 1.5em;
+}
+.about-text .caps-lock {
+  text-transform: uppercase;
+}
+.avatar {
+  background-image: url("/art.jpg");
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  border-radius: 100px;
+  background-position: center;
+  position: relative;
+}
+.about-text .avatar {
+  width: 135px;
+  height: 135px;
+  margin: 0 auto 25px auto;
+}
+.header .avatar {
+  display: none;
+}
+
+@media screen and (max-width: 780px) {
+  .about-text {
+    display: none;
+  }
+}

@@ -8,8 +8,80 @@ import Features from "../components/Features";
 import BlogRoll from "../components/BlogRoll";
 import FullWidthImage from "../components/FullWidthImage";
 
-// eslint-disable-next-line
+import Main from '../components/Main';
+import WorksRoll from '../components/WorksRoll';
+import ContactInfo from '../components/ContactInfo';
+
 export const IndexPageTemplate = ({
+  avatar,
+  avatarText,
+  contactTitle,
+  contactEmail,
+  socialLinks = [],
+}) => {
+  const avatarImage = getImage(avatar) || avatar;
+
+  return (
+    <>
+      <Main
+        avatar={avatarImage}
+        avatarText={avatarText}
+      >
+        <WorksRoll />
+      </Main>
+      <ContactInfo
+        title={contactTitle}
+        email={contactEmail}
+        socialLinks={socialLinks}
+      />
+    </>
+  );
+};
+
+export const pageQuery = graphql`
+  query IndexPageTemplate {
+    markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
+      frontmatter {
+        avatarText
+        avatar {
+          childImageSharp {
+            gatsbyImageData(width: 135, height: 135, quality: 100, layout: FIXED, placeholder: BLURRED)
+          }
+        }
+        contactTitle
+        contactEmail
+        contactText
+        socialLinks {
+          url
+          title
+          icon {
+            publicURL
+          }
+          hide
+        }
+      }
+    }
+  }
+`;
+
+const IndexPage = ({ data }) => {
+  const { frontmatter } = data.markdownRemark;
+
+  return (
+    <Layout>
+      <IndexPageTemplate
+        avatar={frontmatter.avatar}
+        avatarText={frontmatter.avatarText}
+        contactTitle={frontmatter.contactTitle}
+        contactEmail={frontmatter.contactEmail}
+        socialLinks={frontmatter.socialLinks}
+      />
+    </Layout>
+  );
+};
+
+// eslint-disable-next-line
+const IndexPageTemplate1 = ({
   image,
   title,
   heading,
@@ -74,7 +146,7 @@ export const IndexPageTemplate = ({
   );
 };
 
-IndexPageTemplate.propTypes = {
+IndexPageTemplate1.propTypes = {
   image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   title: PropTypes.string,
   heading: PropTypes.string,
@@ -86,7 +158,7 @@ IndexPageTemplate.propTypes = {
   }),
 };
 
-const IndexPage = ({ data }) => {
+const IndexPage1 = ({ data }) => {
   const { frontmatter } = data.markdownRemark;
 
   return (
@@ -114,7 +186,7 @@ IndexPage.propTypes = {
 
 export default IndexPage;
 
-export const pageQuery = graphql`
+const pageQuery1 = graphql`
   query IndexPageTemplate {
     markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
       frontmatter {
